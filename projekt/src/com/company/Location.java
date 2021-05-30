@@ -1,7 +1,16 @@
 package com.company;
 
 public class Location {
-    public float getInfectionModifier(LocName locname){
+    int activityCount;
+
+    public static int getActivityCount() {
+        return activityCount;
+    }
+    public void setActivityCount(int activityCount) {
+        this.activityCount = activityCount;
+    }
+
+    public static float getInfectionModifier(LocName locname){
         float mod = 0;
         switch (locname){
             case NONE: break;
