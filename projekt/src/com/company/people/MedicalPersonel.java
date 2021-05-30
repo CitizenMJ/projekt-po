@@ -4,12 +4,12 @@ import com.company.Location;
 
 import static com.company.Location.LocName.*;
 
-public class AcademicWorker extends Human {
-    public AcademicWorker(){
+public class MedicalPersonel extends Human {
+    public MedicalPersonel(){
         health = 7;
-        mustGo = UNIVERSITY;
+        mustGo = HOSPITAL;
         canGo = new Location.LocName[]{
-                UNIVERSITY,RESTAURANT,CINEMA,OFFICE,
+                SHOP,PARK,RESTAURANT,CLUB,HOSPITAL
         };
     }
 }

@@ -1,7 +1,7 @@
 package com.company;
 
 public class Location {
-    int activityCount;
+    static int activityCount;
 
     public static int getActivityCount() {
         return activityCount;
@@ -13,7 +13,8 @@ public class Location {
     public static float getInfectionModifier(LocName locname){
         float mod = 0;
         switch (locname){
-            case NONE: break;
+            case NONE:
+                break;
             case UNIVERSITY:
                 mod = 1;
                 break;
@@ -29,11 +30,11 @@ public class Location {
             case CINEMA:
                 mod = 1;
                 break;
-            case PUB:
+            case RESTAURANT:
                 mod = 1;
                 break;
             default:
-                throw new IllegalStateException("nie ma danych dla " + locname);
+                mod = 1;
         }
 
         return mod;
@@ -46,6 +47,9 @@ public class Location {
         SHOP,
         PARK,
         CINEMA,
-        PUB
+        RESTAURANT,
+        CLUB,
+        GYM,
+        HOSPITAL
     }
 }
