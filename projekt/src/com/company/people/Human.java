@@ -37,6 +37,10 @@ public class Human {
                     requirements=true;
                 }
             }
+            if(mustGo==NONE){
+                requirements=true;
+            }
+
             if(requirements){
                 activityPlan[activityPlan.length-1]=canGo[random.nextInt(canGo.length)];
             }else{
