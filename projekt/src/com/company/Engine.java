@@ -3,7 +3,6 @@ import com.company.people.*;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -31,14 +30,14 @@ public class Engine {
 
     static void initialize(){
         Scanner scan = new Scanner(System.in);
-        String input = "a";
+        String input;
         String inputMenu = "a";
 
 
         int infected;
         int popSize = 0;
 
-        System.out.printf("Podaj ilość aktywności w ciągu jednego dnia (2-10): ");
+        System.out.println("Podaj ilość aktywności w ciągu jednego dnia (2-10): ");
             while(Location.getActivityCount()<1 || Location.getActivityCount()>10){
                 Location.setActivityCount(scan.nextInt());
             }
@@ -215,7 +214,7 @@ public class Engine {
             popu.updateEliminated();
 
             if (popu.getCount() == popu.getInfectedCount()) {
-                System.out.println("RIP");
+                System.out.println("Wszyscy zostali zarażeni");
                 stop("Cała populacja została zarażona.");
                 break;
             }
@@ -242,7 +241,7 @@ public class Engine {
                  if(loc==NONE){
                      continue;
                  }else{
-                     Day.infect(loc,time,Day.calculateInfectionChance(loc,Day.countPeopleIn(loc,time))); //mateusz prosze nie zapomnij co to robi
+                     Day.infect(loc,time); //mateusz prosze nie zapomnij co to robi
                  }
              }
         }
@@ -352,22 +351,38 @@ public class Engine {
 
         }
 
-        public static int [] countPeopleIn(Location.LocName loc,int time){ //[0] wszyscy w danej lokacji w danym czasie [1] chorzy
-            int [] count = new int[2];
+        //public static int [] countPeopleIn(Location.LocName loc,int time){ //[0] wszyscy w danej lokacji w danym czasie [1] chorzy
+            //int [] count = new int[2];
+            //for(Human HumanTemp : popu.people){
+                //if(HumanTemp.getActivityPlan(time) == loc){
+                    //count[0] =+1;
+                    //if(HumanTemp.getInfected()){
+                        //count[1] =+ 1;
+                    //}
+                //}
+            //}
+            //return count;
+        //}
+
+        static float CountRatioIn(Location.LocName loc, int time){
+            float people=0;
+            float sick=0;
             for(Human HumanTemp : popu.people){
-                if(HumanTemp.getActivityPlan(time) == loc){
-                    count[0] =+1;
+                if(HumanTemp.getActivityPlan(time)==loc){
+                    people=people+1;
                     if(HumanTemp.getInfected()){
-                        count[1] =+ 1;
+                        sick=sick+1;
                     }
                 }
             }
-            return count;
+            return sick/people;
+
         }
 
-        public static float calculateInfectionChance(Location.LocName loc, int[] count){
-            float chance = ((float) (count[1])/ (float) (count[0])) * Location.getInfectionModifier(loc) * globalInfectionModifier;
 
+        public static float calculateInfectionChance(Location.LocName loc,float ratio){
+            float chance = ratio * 25 * Location.getInfectionModifier(loc) * globalInfectionModifier;
+            //System.out.println("chance:" + chance); //debug
             if(chance > 100.00){
                 return 100;
             }else{
@@ -380,7 +395,8 @@ public class Engine {
             return random.nextFloat() * 100;
         }
 
-        public static void infect(Location.LocName loc, int time, float chance){
+        public static void infect(Location.LocName loc, int time){
+            float chance = Day.calculateInfectionChance(loc,CountRatioIn(loc,time));
             for(Human HumanTemp : popu.people){
                 if(!HumanTemp.getInfected() && HumanTemp.getActivityPlan(time) == loc && rollDie()<=chance){
                     System.out.println("Nowa infekcja");

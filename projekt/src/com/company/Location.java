@@ -11,7 +11,7 @@ public class Location {
     }
 
     public static float getInfectionModifier(LocName locname){
-        float mod = 0;
+        float mod = 1F;
         switch (locname){
             case NONE:
                 break;
