@@ -7,7 +7,7 @@ import java.util.Random;
 import static com.company.Location.LocName.*;
 
 public class Human {
-    boolean infected;
+    public boolean infected;
     boolean eliminated;
     int health;
     //boolean vaccinated;
@@ -16,10 +16,10 @@ public class Human {
     Location.LocName [] activityPlan;
 
     Human(){
-        infected =false;
-        eliminated = false;
+        this.infected = false;
+        this.eliminated = false;
         //vaccinated = false;
-        activityPlan = new Location.LocName[Location.getActivityCount()];
+        this.activityPlan = new Location.LocName[Location.getActivityCount()];
     }
 
     //generuje plan dnia

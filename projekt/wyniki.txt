@@ -1,0 +1,33 @@
+Rozpoczęcie symulacji
+
+Dzień: 0
+Populacja: 2137
+Ilość zdrowych: 1471
+Ilość chorych: 666
+Ilość wyeliminowanych: 0
+
+Dzień: 7
+Populacja: 2137
+Ilość zdrowych: 86
+Ilość chorych: 2051
+Ilość wyeliminowanych: 0
+
+Dzień: 14
+Populacja: 2137
+Ilość zdrowych: 5
+Ilość chorych: 2132
+Ilość wyeliminowanych: 0
+
+Dzień: 21
+Populacja: 2137
+Ilość zdrowych: 1
+Ilość chorych: 2136
+Ilość wyeliminowanych: 0
+
+Symulacja została zatrzymana. Powód: Cała populacja została zarażona.
+
+Dzień: 23
+Populacja: 2137
+Ilość zdrowych: 0
+Ilość chorych: 2137
+Ilość wyeliminowanych: 0
