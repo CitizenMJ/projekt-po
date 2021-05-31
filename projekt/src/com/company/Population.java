@@ -25,7 +25,7 @@ public class Population {
         return false;
     }
 
-    public int getInfected() {
+    public int getInfectedCount() {
         return infected;
     }
 
@@ -33,11 +33,11 @@ public class Population {
         this.infected = infected;
     }
 
-    void updateInfected(){
+    public void updateInfected(){
         int temp=0;
         for(Human HumanTemp : people){
             if (HumanTemp.getInfected()){
-                temp=+1;
+                temp=temp+1;
             }
         }
         this.infected=temp;
@@ -49,13 +49,13 @@ public class Population {
         int temp=0;
         for(Human HumanTemp : people){
             if (HumanTemp.getEliminated()){
-                temp=+1;
+                temp=temp+1;
             }
         }
         this.eliminated=temp;
     }
 
-    public int getEliminated() {
+    public int getEliminatedCount() {
         return eliminated;
     }
 
