@@ -24,11 +24,11 @@ public class Human {
 
     //generuje plan dnia
     public void generateActivity(){
-        if(getEliminated()){
+        if(getEliminated()){//umieszcza wyeliminowanych w NONE
             for(Location.LocName loc : activityPlan){
                 loc = NONE;
             }
-        }else{
+        }else{ //losuje aktywność z listy dostępnych aktywnośći, sprawdza czy aktywność obowiązkowa została wylosowana przypadkiem
             boolean requirements=false;
             Random random = new Random();
             for(int i=0;i<activityPlan.length-1;i++){
@@ -37,11 +37,11 @@ public class Human {
                     requirements=true;
                 }
             }
-            if(mustGo==NONE){
+            if(mustGo==NONE){//jeżeli brakuje aktywności losowej, zachowaj się jakby była już wylosowana
                 requirements=true;
             }
 
-            if(requirements){
+            if(requirements){//uzupełnij listę aktywności o aktywność obowiązkową jeżeli
                 activityPlan[activityPlan.length-1]=canGo[random.nextInt(canGo.length)];
             }else{
                 activityPlan[activityPlan.length-1]=mustGo;
