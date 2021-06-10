@@ -15,7 +15,7 @@ public class Engine {
     static float globalInfectionModifier=0F;
     static float incubationTimeModifier=0F;
 
-    public static void main(String[] args) {
+    public static void simulation() {//główna funckja engine
         initialize();
         System.out.println("Rozpoczęcie symulacji:");
 
@@ -28,7 +28,7 @@ public class Engine {
     }
 
 
-    static void initialize(){
+    static void initialize(){ //zbieranie wartości początkowych
         Scanner scan = new Scanner(System.in);
         String input;
         String inputMenu = "a";
@@ -84,11 +84,11 @@ public class Engine {
             //todo
             int aw,cas,mp,ow,stu; //nauczyciel, pracownik sklepu, pracownik medyczny, pracownik biurowy, uczeń/student
 
-            aw = initializationType2lazy("Podaj liczbę nauczyceli: ",scan);
-            cas = initializationType2lazy("Podaj liczbę pracowników sklepowych: ",scan);
-            mp = initializationType2lazy("Podaj liczbę pracowników medycznych: ",scan);
-            ow = initializationType2lazy("Podaj liczbę pracowników biurowych: ",scan);
-            stu = initializationType2lazy("Podaj liczbę uczniów/studentów: ",scan);
+            aw = initializationType2("Podaj liczbę nauczyceli: ",scan);
+            cas = initializationType2("Podaj liczbę pracowników sklepowych: ",scan);
+            mp = initializationType2("Podaj liczbę pracowników medycznych: ",scan);
+            ow = initializationType2("Podaj liczbę pracowników biurowych: ",scan);
+            stu = initializationType2("Podaj liczbę uczniów/studentów: ",scan);
 
 
             popSize = aw+cas+mp+ow+stu;
@@ -117,7 +117,7 @@ public class Engine {
         }
     }
 
-    static private int initializationType2lazy(String str,Scanner scan){
+    static private int initializationType2(String str,Scanner scan){//kod zajmujący się drugim typem tworzenia populacji
         System.out.println(str);
         int temp;
         String input;
@@ -140,7 +140,7 @@ public class Engine {
     }
 
 
-    static void createPopulationDefault(int popSize){
+    static void createPopulationDefault(int popSize){ //tworzy populacje z domyślnymi proporcjami
         popu.setCount(popSize);
         popu.people = new Human[popSize];
         int j=0;
@@ -166,7 +166,7 @@ public class Engine {
         }
     }
 
-    static void createPopulation(int aw, int cas, int mp, int ow, int stu){
+    static void createPopulation(int aw, int cas, int mp, int ow, int stu){ // tworzy populacje dostosowaną przez użytkownika
 
         int popSize = aw+cas+mp+ow+stu;
         popu.setCount(popSize);
@@ -196,14 +196,14 @@ public class Engine {
         }
     }
 
-    static void initialInfection(int infected){
+    static void initialInfection(int infected){ //pierwsi zarażeni
         popu.setInfected(infected);
         popu.people=shuffleArray(popu.people);
         for(int i=0;i<infected;i++)
             popu.people[i].setInfected(true);
     }
 
-    static void run(){
+    static void run(){//główna pętla
         while(true) {
             Day.decreaseHealth();
             Day.eliminate();
@@ -235,19 +235,19 @@ public class Engine {
         }
     }
 
-    static void runDailyPlan(){
+    static void runDailyPlan(){// przeprowadza dzienny plan
         for(int time=0;time<Location.getActivityCount();time++){
              for(Location.LocName loc : Location.LocName.values()){
                  if(loc==NONE){
                      continue;
                  }else{
-                     Day.infect(loc,time); //mateusz prosze nie zapomnij co to robi
+                     Day.infect(loc,time);
                  }
              }
         }
     }
 
-    static void stop(String str){
+    static void stop(String str){//wypisuje dane kończące
         try{
             FileWriter writer = new FileWriter(fileName,true);
             writer.append("\r\nSymulacja została zatrzymana. Powód: "+str+"\r\n");
@@ -259,7 +259,7 @@ public class Engine {
 
     }
 
-    static void printAtStart(){
+    static void printAtStart(){//wypisuje dane początkowe
         try{
             File file = new File(fileName);
             if(file.createNewFile()){
@@ -278,7 +278,7 @@ public class Engine {
 
     }
 
-    static void printToFile(){
+    static void printToFile(){ //wypisuje dane do pliku
         try{
             System.out.println("Zapisywanie wyników dnia: "+Day.getDayCount());
             FileWriter writer = new FileWriter(fileName, true);
@@ -294,7 +294,7 @@ public class Engine {
 
     }
 
-    static Human[] shuffleArray(Human[] array){
+    static Human[] shuffleArray(Human[] array){//tasuje tablicę
         Random random = new Random();
 
         for (int i=0; i<array.length; i++) {
@@ -364,7 +364,7 @@ public class Engine {
             //return count;
         //}
 
-        static float CountRatioIn(Location.LocName loc, int time){
+        static float CountRatioIn(Location.LocName loc, int time){ //zlicza procent chorych w danej lokacji
             float people=0;
             float sick=0;
             for(Human HumanTemp : popu.people){
@@ -380,7 +380,7 @@ public class Engine {
         }
 
 
-        public static float calculateInfectionChance(Location.LocName loc,float ratio){
+        public static float calculateInfectionChance(Location.LocName loc,float ratio){ //szansa na zarażenie w lokacji
             float chance = ratio * 25 * Location.getInfectionModifier(loc) * globalInfectionModifier;
             //System.out.println("chance:" + chance); //debug
             if(chance > 100.00){
@@ -395,7 +395,7 @@ public class Engine {
             return random.nextFloat() * 100;
         }
 
-        public static void infect(Location.LocName loc, int time){
+        public static void infect(Location.LocName loc, int time){ //zaraża ludzi
             float chance = Day.calculateInfectionChance(loc,CountRatioIn(loc,time));
             for(Human HumanTemp : popu.people){
                 if(!HumanTemp.getInfected() && HumanTemp.getActivityPlan(time) == loc && rollDie()<=chance){
