@@ -29,7 +29,7 @@ public class Population {
         return infected;
     }
 
-    public void setInfected(int infected) {
+    public void setInfectedCount(int infected) {
         this.infected = infected;
     }
 

@@ -7,93 +7,33 @@ Ilość chorych: 25
 Ilość wyeliminowanych: 0
 
 Dzień: 7
-Populacja: 25000
-Ilość zdrowych: 24973
-Ilość chorych: 27
-Ilość wyeliminowanych: 0
-
-Dzień: 14
-Populacja: 24980
-Ilość zdrowych: 24972
-Ilość chorych: 8
-Ilość wyeliminowanych: 20
-
-Dzień: 21
 Populacja: 24976
-Ilość zdrowych: 24971
-Ilość chorych: 5
+Ilość zdrowych: 24509
+Ilość chorych: 467
 Ilość wyeliminowanych: 24
 
+Dzień: 14
+Populacja: 24327
+Ilość zdrowych: 16113
+Ilość chorych: 8214
+Ilość wyeliminowanych: 673
+
+Dzień: 21
+Populacja: 15971
+Ilość zdrowych: 932
+Ilość chorych: 15039
+Ilość wyeliminowanych: 9029
+
 Dzień: 28
-Populacja: 24972
-Ilość zdrowych: 24970
-Ilość chorych: 2
-Ilość wyeliminowanych: 28
+Populacja: 4573
+Ilość zdrowych: 13
+Ilość chorych: 4560
+Ilość wyeliminowanych: 20427
 
-Dzień: 35
-Populacja: 24971
-Ilość zdrowych: 24970
-Ilość chorych: 1
-Ilość wyeliminowanych: 29
+Symulacja została zatrzymana. Powód: Cała populacja została zarażona.
 
-Dzień: 42
-Populacja: 24971
-Ilość zdrowych: 24969
-Ilość chorych: 2
-Ilość wyeliminowanych: 29
-
-Dzień: 49
-Populacja: 24971
-Ilość zdrowych: 24966
-Ilość chorych: 5
-Ilość wyeliminowanych: 29
-
-Dzień: 56
-Populacja: 24970
-Ilość zdrowych: 24962
-Ilość chorych: 8
-Ilość wyeliminowanych: 30
-
-Dzień: 63
-Populacja: 24966
-Ilość zdrowych: 24961
-Ilość chorych: 5
-Ilość wyeliminowanych: 34
-
-Dzień: 70
-Populacja: 24965
-Ilość zdrowych: 24959
-Ilość chorych: 6
-Ilość wyeliminowanych: 35
-
-Dzień: 77
-Populacja: 24963
-Ilość zdrowych: 24957
-Ilość chorych: 6
-Ilość wyeliminowanych: 37
-
-Dzień: 84
-Populacja: 24960
-Ilość zdrowych: 24956
-Ilość chorych: 4
-Ilość wyeliminowanych: 40
-
-Dzień: 91
-Populacja: 24959
-Ilość zdrowych: 24954
-Ilość chorych: 5
-Ilość wyeliminowanych: 41
-
-Dzień: 98
-Populacja: 24955
-Ilość zdrowych: 24954
-Ilość chorych: 1
-Ilość wyeliminowanych: 45
-
-Symulacja została zatrzymana. Powód: Wirus został wyeliminowany.
-
-Dzień: 99
-Populacja: 24954
-Ilość zdrowych: 24954
-Ilość chorych: 0
-Ilość wyeliminowanych: 46
+Dzień: 33
+Populacja: 729
+Ilość zdrowych: 0
+Ilość chorych: 729
+Ilość wyeliminowanych: 24271

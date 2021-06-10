@@ -7,7 +7,7 @@ import java.util.Random;
 import static com.company.Location.LocName.*;
 
 public class Human {
-    public boolean infected;
+    boolean infected;
     boolean eliminated;
     int health;
     //boolean vaccinated;
