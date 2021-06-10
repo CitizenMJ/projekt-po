@@ -81,14 +81,13 @@ public class Engine {
         }
 
         if (inputMenu.charAt(0) == '2'){
-            //todo
             int aw,cas,mp,ow,stu; //nauczyciel, pracownik sklepu, pracownik medyczny, pracownik biurowy, uczeń/student
 
-            aw = initializationType2("Podaj liczbę nauczyceli: ",scan);
-            cas = initializationType2("Podaj liczbę pracowników sklepowych: ",scan);
-            mp = initializationType2("Podaj liczbę pracowników medycznych: ",scan);
-            ow = initializationType2("Podaj liczbę pracowników biurowych: ",scan);
-            stu = initializationType2("Podaj liczbę uczniów/studentów: ",scan);
+            aw = howManyPeople("Podaj liczbę nauczyceli: ",scan);
+            cas = howManyPeople("Podaj liczbę pracowników sklepowych: ",scan);
+            mp = howManyPeople("Podaj liczbę pracowników medycznych: ",scan);
+            ow = howManyPeople("Podaj liczbę pracowników biurowych: ",scan);
+            stu = howManyPeople("Podaj liczbę uczniów/studentów: ",scan);
 
 
             popSize = aw+cas+mp+ow+stu;
@@ -117,7 +116,7 @@ public class Engine {
         }
     }
 
-    static private int initializationType2(String str,Scanner scan){//kod zajmujący się drugim typem tworzenia populacji
+    static private int howManyPeople(String str,Scanner scan){//kod zajmujący się drugim typem tworzenia populacji
         System.out.println(str);
         int temp;
         String input;
@@ -168,6 +167,8 @@ public class Engine {
 
     static void createPopulation(int aw, int cas, int mp, int ow, int stu){ // tworzy populacje dostosowaną przez użytkownika
 
+
+
         int popSize = aw+cas+mp+ow+stu;
         popu.setCount(popSize);
         popu.people = new Human[popSize];
@@ -197,7 +198,7 @@ public class Engine {
     }
 
     static void initialInfection(int infected){ //pierwsi zarażeni
-        popu.setInfected(infected);
+        popu.setInfectedCount(infected);
         popu.people=shuffleArray(popu.people);
         for(int i=0;i<infected;i++)
             popu.people[i].setInfected(true);
@@ -208,7 +209,7 @@ public class Engine {
             Day.decreaseHealth();
             Day.eliminate();
             Day.generateAllActivity();
-            runDailyPlan();
+            Day.runDailyPlan();
             Day.increaseDayCount();
             popu.updateInfected();
             popu.updateEliminated();
@@ -235,17 +236,7 @@ public class Engine {
         }
     }
 
-    static void runDailyPlan(){// przeprowadza dzienny plan
-        for(int time=0;time<Location.getActivityCount();time++){
-             for(Location.LocName loc : Location.LocName.values()){
-                 if(loc==NONE){
-                     continue;
-                 }else{
-                     Day.infect(loc,time);
-                 }
-             }
-        }
-    }
+
 
     static void stop(String str){//wypisuje dane kończące
         try{
@@ -309,7 +300,20 @@ public class Engine {
 
     static private class Day{
 
+
         static int dayCount=0;
+
+        public static void runDailyPlan(){// przeprowadza dzienny plan
+            for(int time=0;time<Location.getActivityCount();time++){
+                for(Location.LocName loc : Location.LocName.values()){
+                    if(loc==NONE){
+                        continue;
+                    }else{
+                        Day.infect(loc,time);
+                    }
+                }
+            }
+        }
 
         public static int getDayCount() {
             return dayCount;
