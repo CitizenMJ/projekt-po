@@ -15,6 +15,9 @@ public class Engine {
     static float globalInfectionModifier=0F;
     static float incubationTimeModifier=0F;
 
+    /**
+     * głowna funkcja engine
+     */
     public static void simulation() {//główna funckja engine
         initialize();
         System.out.println("Rozpoczęcie symulacji:");
@@ -27,7 +30,9 @@ public class Engine {
 
     }
 
-
+    /**
+     * pobiera wartosci poczatkowe
+     */
     static void initialize(){ //zbieranie wartości początkowych
         Scanner scan = new Scanner(System.in);
         String input;
@@ -81,17 +86,19 @@ public class Engine {
         }
 
         if (inputMenu.charAt(0) == '2'){
-            int aw,cas,mp,ow,stu; //nauczyciel, pracownik sklepu, pracownik medyczny, pracownik biurowy, uczeń/student
+            //nauczyciel, pracownik sklepu, pracownik medyczny, pracownik biurowy, uczeń/student
+            int[] peopleTypes = new int[5];
 
-            aw = howManyPeople("Podaj liczbę nauczyceli: ",scan);
-            cas = howManyPeople("Podaj liczbę pracowników sklepowych: ",scan);
-            mp = howManyPeople("Podaj liczbę pracowników medycznych: ",scan);
-            ow = howManyPeople("Podaj liczbę pracowników biurowych: ",scan);
-            stu = howManyPeople("Podaj liczbę uczniów/studentów: ",scan);
+            peopleTypes[0] = howManyPeople("Podaj liczbę nauczyceli: ",scan);
+            peopleTypes[1] = howManyPeople("Podaj liczbę pracowników sklepowych: ",scan);
+            peopleTypes[2] = howManyPeople("Podaj liczbę pracowników medycznych: ",scan);
+            peopleTypes[3] = howManyPeople("Podaj liczbę pracowników biurowych: ",scan);
+            peopleTypes[4] = howManyPeople("Podaj liczbę uczniów/studentów: ",scan);
 
-
-            popSize = aw+cas+mp+ow+stu;
-            createPopulation(aw,cas,mp,ow,stu);
+            for (int i=0;i<peopleTypes.length;i++){
+                popSize=popSize+peopleTypes[i];
+            }
+            createPopulation(peopleTypes,popSize);
         }
 
         System.out.println("Podaj początkową ilość zarażonych");
@@ -116,6 +123,11 @@ public class Engine {
         }
     }
 
+    /**
+     * kod zajmujący się pobieraniem od uzytwkonika ilosci okreslonego typu ludzi
+     * @param str wiadomosc do wyswietlenia
+     * @return input uzytkownika
+     */
     static private int howManyPeople(String str,Scanner scan){//kod zajmujący się drugim typem tworzenia populacji
         System.out.println(str);
         int temp;
@@ -138,7 +150,10 @@ public class Engine {
 
     }
 
-
+    /**
+     * tworzy populacje z domyslnymi proporcjami
+     * @param popSize rozmiar populacji
+     */
     static void createPopulationDefault(int popSize){ //tworzy populacje z domyślnymi proporcjami
         popu.setCount(popSize);
         popu.people = new Human[popSize];
@@ -165,38 +180,45 @@ public class Engine {
         }
     }
 
-    static void createPopulation(int aw, int cas, int mp, int ow, int stu){ // tworzy populacje dostosowaną przez użytkownika
+    /**
+     * tworzy populacje dostosowana przez uzytkownika
+     * @param types array z iloscia poszczegolnych ludzi
+     * @param popSize laczny rozmiar populacji
+     */
+    static void createPopulation(int [] types,int popSize){ // tworzy populacje dostosowaną przez użytkownika
 
 
-
-        int popSize = aw+cas+mp+ow+stu;
         popu.setCount(popSize);
         popu.people = new Human[popSize];
 
         int j=0;
 
-        for(int i=0;i<aw;i++){
+        for(int i=0;i<types[0];i++){
             popu.people[j] = new AcademicWorker();
             j=j+1;
         }
-        for(int i=0;i<cas;i++){
+        for(int i=0;i<types[1];i++){
             popu.people[j] = new Cashier();
             j=j+1;
         }
-        for(int i=0;i<mp;i++){
+        for(int i=0;i<types[2];i++){
             popu.people[j] = new MedicalPersonel();
             j=j+1;
         }
-        for(int i=0;i<ow;i++){
+        for(int i=0;i<types[3];i++){
             popu.people[j] = new OfficeWorker();
             j=j+1;
         }
-        for(int i=0;i<stu;i++){
+        for(int i=0;i<types[4];i++){
             popu.people[j] = new Student();
             j=j+1;
         }
     }
 
+    /**
+     * zmienia stan zarazania ludzi w startowej populacji
+     * @param infected liczba ludzi zarazonych
+     */
     static void initialInfection(int infected){ //pierwsi zarażeni
         popu.setInfectedCount(infected);
         popu.people=shuffleArray(popu.people);
@@ -204,6 +226,9 @@ public class Engine {
             popu.people[i].setInfected(true);
     }
 
+    /**
+     * glowna petla symulacji
+     */
     static void run(){//główna pętla
         while(true) {
             Day.decreaseHealth();
@@ -237,7 +262,10 @@ public class Engine {
     }
 
 
-
+    /**
+     * Zostaje wywyolana gdy warunek konczacy symulacje zostanie wypelniony. Wypisuje dane końcowe do pliku.
+     * @param str Powod zatrzymania symulacji
+     */
     static void stop(String str){//wypisuje dane kończące
         try{
             FileWriter writer = new FileWriter(fileName,true);
@@ -250,6 +278,9 @@ public class Engine {
 
     }
 
+    /**
+     * wypisuje poczatkowe dane
+     */
     static void printAtStart(){//wypisuje dane początkowe
         try{
             File file = new File(fileName);
@@ -269,6 +300,9 @@ public class Engine {
 
     }
 
+    /**
+     * metoda zajmujaca sie wypisywaniem statystyk sumulacji do pliku
+     */
     static void printToFile(){ //wypisuje dane do pliku
         try{
             System.out.println("Zapisywanie wyników dnia: "+Day.getDayCount());
@@ -285,6 +319,11 @@ public class Engine {
 
     }
 
+    /**
+     * tasuje array
+     * @param array niepotasowany array
+     * @return potasowany array
+     */
     static Human[] shuffleArray(Human[] array){//tasuje tablicę
         Random random = new Random();
 
@@ -303,6 +342,9 @@ public class Engine {
 
         static int dayCount=0;
 
+        /**
+         * przeprowadza dzienny plan
+         */
         public static void runDailyPlan(){// przeprowadza dzienny plan
             for(int time=0;time<Location.getActivityCount();time++){
                 for(Location.LocName loc : Location.LocName.values()){
@@ -331,6 +373,9 @@ public class Engine {
             //}
         //}
 
+        /**
+         * zmniejsza punkty zdrowia u chorych
+         */
         public static void decreaseHealth(){
             for(Human HumanTemp : popu.people){
                 if(HumanTemp.getInfected() && !HumanTemp.getEliminated()){
@@ -339,6 +384,9 @@ public class Engine {
             }
         }
 
+        /**
+         * eliminuje chorych u ktorych punkty zdrowia wynosza 0 z populacji.
+         */
         public static void eliminate(){
             for (Human HumanTemp : popu.people){
                 if(HumanTemp.getHealth() <= 0 && !HumanTemp.getEliminated()){
@@ -348,6 +396,10 @@ public class Engine {
 
             }
         }
+
+        /**
+         * generuje plan aktywnosci dla wszystkich ludzi
+         */
         public static void generateAllActivity(){
             for (Human HumanTemp : popu.people){
                 HumanTemp.generateActivity();
@@ -368,6 +420,12 @@ public class Engine {
             //return count;
         //}
 
+        /**
+         * liczy stosunek chorych do ogolu w danej lokacji w danym czasie
+         * @param loc lokacja
+         * @param time czas okreslony numerem indeksu aktywnosci
+         * @return stosunek
+         */
         static float CountRatioIn(Location.LocName loc, int time){ //zlicza procent chorych w danej lokacji
             float people=0;
             float sick=0;
@@ -383,7 +441,12 @@ public class Engine {
 
         }
 
-
+        /**
+         * Oblicza szanse na zarazenie w danej lokacji
+         * @param loc lokacja
+         * @param ratio stosunek ludzi w danej lokacji w danym czasie
+         * @return
+         */
         public static float calculateInfectionChance(Location.LocName loc,float ratio){ //szansa na zarażenie w lokacji
             float chance = ratio * 25 * Location.getInfectionModifier(loc) * globalInfectionModifier;
             //System.out.println("chance:" + chance); //debug
@@ -394,11 +457,20 @@ public class Engine {
             }
         }
 
+        /**
+         * rzut "kostka"
+         * @return float pomiedzy 0, a 100
+         */
         public static float rollDie(){ // losowa liczba od 0 do 100
             Random random = new Random();
             return random.nextFloat() * 100;
         }
 
+        /**
+         * zaraza ludzi w danej lokacji i czasie
+         * @param loc lokacja
+         * @param time czas
+         */
         public static void infect(Location.LocName loc, int time){ //zaraża ludzi
             float chance = Day.calculateInfectionChance(loc,CountRatioIn(loc,time));
             for(Human HumanTemp : popu.people){

@@ -22,7 +22,8 @@ public class Human {
         this.activityPlan = new Location.LocName[Location.getActivityCount()];
     }
 
-    //generuje plan dnia
+    /**generuje plan dnia
+     */
     public void generateActivity(){
         if(getEliminated()){//umieszcza wyeliminowanych w NONE
             for(Location.LocName loc : activityPlan){
@@ -41,7 +42,7 @@ public class Human {
                 requirements=true;
             }
 
-            if(requirements){//uzupełnij listę aktywności o aktywność obowiązkową jeżeli
+            if(requirements){//uzupełnij listę aktywności o aktywność obowiązkową jeżeli jej brakuje
                 activityPlan[activityPlan.length-1]=canGo[random.nextInt(canGo.length)];
             }else{
                 activityPlan[activityPlan.length-1]=mustGo;
@@ -49,11 +50,19 @@ public class Human {
         }
     }
 
-
-    public Location.LocName[] getActivityPlan(){ //zwraca plan dnia
+    /**
+     *
+     * @return caly plan dnia w postaci listy
+     */
+    public Location.LocName[] getActivityPlan(){
         return activityPlan;
     }
 
+    /**
+     *
+     * @param a indeks aktywnosci
+     * @return zwraca aktywnosc dla konkretnego czasu przedstawionego jako indeks listy
+     */
     public Location.LocName getActivityPlan(int a){ //zwraca plan dla określonej części dnia
         return activityPlan[a];
     }
