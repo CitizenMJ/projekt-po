@@ -16,6 +16,10 @@ public class Population {
         this.count = count;
     }
 
+    /**
+     * metoda sprawdza czy ktos jest dalej w stanie rozprzestrzeniac wirusa
+     * @return
+     */
     public boolean uneliminatedInfeted(){ //kod sprawdza czy ktoś dalej jest w stanie rozprzestrzeniać wirusa (warunek głównej pętli symulacji)
         for(Human HumanTemp : people){
             if(!HumanTemp.getEliminated() && HumanTemp.getInfected()){
@@ -33,6 +37,9 @@ public class Population {
         this.infected = infected;
     }
 
+    /**
+     * zlicza zainfekowanych
+     */
     public void updateInfected(){
         int temp=0;
         for(Human HumanTemp : people){
@@ -44,7 +51,9 @@ public class Population {
     }
 
 
-
+    /**
+     * zlicza wyeliminowanych
+     */
     public void updateEliminated(){
         int temp=0;
         for(Human HumanTemp : people){

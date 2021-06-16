@@ -10,6 +10,11 @@ public class Location {
         activityCount = a;
     }
 
+    /**
+     * zwraca modyfikator zarazenia dla danej lokacji
+     * @param locname lokacja
+     * @return modyfikator
+     */
     public static float getInfectionModifier(LocName locname){
         float mod = 1F;
         switch (locname){

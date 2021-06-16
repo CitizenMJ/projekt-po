@@ -1,39 +1,33 @@
 Rozpoczęcie symulacji
 
 Dzień: 0
-Populacja: 25000
-Ilość zdrowych: 24975
-Ilość chorych: 25
+Populacja: 8016
+Ilość zdrowych: 7982
+Ilość chorych: 34
 Ilość wyeliminowanych: 0
 
 Dzień: 7
-Populacja: 24976
-Ilość zdrowych: 24509
-Ilość chorych: 467
-Ilość wyeliminowanych: 24
+Populacja: 8003
+Ilość zdrowych: 7349
+Ilość chorych: 654
+Ilość wyeliminowanych: 13
 
 Dzień: 14
-Populacja: 24327
-Ilość zdrowych: 16113
-Ilość chorych: 8214
-Ilość wyeliminowanych: 673
+Populacja: 7693
+Ilość zdrowych: 2027
+Ilość chorych: 5666
+Ilość wyeliminowanych: 323
 
 Dzień: 21
-Populacja: 15971
-Ilość zdrowych: 932
-Ilość chorych: 15039
-Ilość wyeliminowanych: 9029
-
-Dzień: 28
-Populacja: 4573
-Ilość zdrowych: 13
-Ilość chorych: 4560
-Ilość wyeliminowanych: 20427
+Populacja: 5476
+Ilość zdrowych: 48
+Ilość chorych: 5428
+Ilość wyeliminowanych: 2540
 
 Symulacja została zatrzymana. Powód: Cała populacja została zarażona.
 
-Dzień: 33
-Populacja: 729
+Dzień: 26
+Populacja: 2810
 Ilość zdrowych: 0
-Ilość chorych: 729
-Ilość wyeliminowanych: 24271
+Ilość chorych: 2810
+Ilość wyeliminowanych: 5206
